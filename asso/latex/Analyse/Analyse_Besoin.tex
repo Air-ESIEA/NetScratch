@@ -1,0 +1,38 @@
+\documentclass[14pt,a4paper]{extarticle}
+\author{Valentin MICHEL}
+\date{15 Octobre 2019}
+\usepackage{graphicx}
+%\pagenumbering{gobble} 
+%\makeatletter
+%\renewcommand{\@seccntformat}[1]{}
+%\makeatother
+
+\title{Analyse de Besoins \\ Projet NetScratch}
+\begin{document}
+\maketitle{}
+\center{\includegraphics[]{../../supertest.jpg}}
+
+\break
+\section{Étude de l'existant}
+Le réseau d'IN'TECH est encore en chantier après la mise en service de l'infrastructure au cause des projets joints du semestre dernier.
+Après une demande du service informatique du Groupe ESIEA, les anciens réseaux de TP d'IN'TECH, les réseaux Semestres ont été coupés. IN'TECH est aujourd'hui sans réseau de TP viable.
+Dans ce contexte, les efforts actuels de la gouvernance informatique du parc IN'TECH cherche a déployer des réseaux TP utilisables pour les étudiants et leurs permettre de travailler.
+C'est dans ce contexte que l'équipe NetScratch cherche à déployer des outils améliorant la QoS (qualité de service).
+\section{Besoin}
+Avec cette nouvelle infrastructure, un besoin d'optimisation de la bande passante apparait pour conserver une qualité de service satisfaisante. 
+Nous avons identifiés deux points d'optimisation de bande passante :
+\begin{itemize}
+	\item{Mises à jour Système}
+	\item{Publicité sur internet}
+\end{itemize}
+\subsection{Mises à jour système}
+Les TP peuvent nécessiter des logiciels connu à l'avance par le professeur. Pour le bon déroulement du TP, chaque étuidant est supoosé avoir ces logiciels installés et à jour.
+De plus, les mises à jour des divers systèmes d'expoitations utilisés au sein de l'école peuevent consommer une quantité importante de bande passante.
+Les logiciels étant tous identiques, il est sub-optimal de les télécharger pour chaque machine depuis un serveur distant : un server de cache permet de limiter la quantité de téléchargement effectués sur le réseau. En effet, chaque machine télécharge les paquets sur le réseau local.
+\subsection{Publicité}
+Les pages servie sur Internet comportent souvent de la publicité. 
+Le téléchargement de ces publicités consomme de la bande passante. En bloquant ces publicités à l'échelle du réseau, l'expérience utilisateur s'en trouve améliorée.
+.
+\section{Besoin fonctionnels}
+Pour mettre en place ces deux améliorations du réseau, un serveur DNS est requis. Des techniques d'usurpation DNS devront être déployer pour forcer les client du réseau à utiliser le serveur de cache, et également pour le blocage de publicité, en prétendant être les serveurs de mises à jour, ou ceux des annonceurs publicitaires.
+\end{document}

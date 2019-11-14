@@ -1,0 +1,137 @@
+\documentclass[14pt,a4paper]{extarticle}
+\author{Valentin MICHEL}
+\date{15 Octobre 2019}
+\usepackage{graphicx}
+\newcommand{\windaube}{Microsoft Windows®}
+\usepackage[document]{ragged2e}
+%\pagenumbering{gobble} 
+%\makeatletter
+%\renewcommand{\@seccntformat}[1]{}
+%\makeatother
+
+\title{Spécifications \\ Projet NetScratch \\ Mission QoS}
+\begin{document}
+\maketitle{}
+\center{\includegraphics[]{../../supertest.jpg}}
+\justify
+\break
+\tableofcontents
+\break
+\section{Rappel des Besoins}
+Pour améliorer la Qualité de Service sur les futurs réseaux TP d'IN'TECH, les deux services suivant devront être déployé :
+\begin{itemize}
+    \item{Serveur de cache de paquets}
+    \item{Bloqueur de publicité}
+    \item{Pré-téléchargement des logiciels pour les TP/TD...}
+\end{itemize}
+\break
+\section{Spécifications logicielles}
+Pour optimiser l'utilisation de la bande passante a des fins de mises a jours système, on utilisera des serveurs de cache.
+En effet, ceux ci sont plus adaptés que des mirroirs de dépôts de distribution, ces derniers étant très gourmand en bande passante pour les maintenir a jour, et en stockage pour contenir tout les logiciels.
+Un serveur de cache télécharge un paquet une seule fois avant de le servir aux client locaux. \\\\
+De même, on peut éliminer les téléchargement de publicité sur les pages web consultées par les utilisateurs, les épargant de la pression mercantile et limitant l'empreinte de la navigation web. \\\\
+Enfin, les TPs souffrent des temps de téléchargement des logiciels utilisés, de la même façon que le caching des paquets systèmes, on peut déployer des solutions d'hébergement local, optimisant le temps de mise en place des TPs. 
+
+\break
+\subsection{Cache de paquets}
+On mettra en cache les mises à jour système pour certaines distributions Linux et pour \windaube.
+\subsubsection{Linux}
+Les caches de paquets pour Linux seront configurés pour les distributions suivantes :
+\begin{itemize}
+    \item{Debian}
+    \item{Ubuntu}
+    \item{Fedora}
+    \item{CentOS}
+\end{itemize}
+Pour ce faire, deux logiciels peuvent être utilisés : apt-cacher-ng, qui supporte plusieurs distributions en un seul logiciel, ou nginx, qui devra être configuré pour chaque distribution. \\
+Le choix de la solution sera fonction de la facilité de mise en place.\\\\ 
+Pour forcer les clients à utiliser les caches, on cherchera à déployer un proxy transparent http, qui redirige les requêtes de téléchargement de paquets vers les caches. \\ 
+Pour cela on pourra utiliser squid, voir nginx.\\ 
+Le proxy laissera passer toute les requêtes HTTPS, et toutes les requêtes HTTP ne pointant pas vers les dépôts.\\\\
+De plus, pour optimiser l'utilisation de stockage, on ne conservera que les 2 versions les plus récentes. \\\\
+
+\break
+En résumé :
+\begin{itemize}
+    \item{OS du serveur de cache : Debian}
+    \item{Cache : nginx ou apt-cacher-ng}
+    \item{Proxy : squid ou nginx}
+\end{itemize}
+\subsubsection{\windaube}
+Les serveurs \windaube Serveur disposent d'une fonctionnalité appelée BranchCache, avec deux modes :
+\begin{itemize}
+    \item{cache distribué}
+    \item{cache hébergé}
+\end{itemize}
+Le mode distribué partage les mises à jour des clients sur le réseau en mode pair-à-pair.\\
+C'est mode hébergé qui nous intéresse; en effet, celui-ci permet de servir des paquets depuis un serveur \windaube serveur hébergé en local.\\
+Pour utiliser le cache, les clients devront le configurer manuellement.\\\\
+En résumé : 
+\begin{itemize}
+    \item{OS  du serveur de cache : Windows Serveur 2016}
+    \item{Cache : BranchCache / WSUS}
+    \item{Configuration manuelle}
+\end{itemize}
+\break
+\subsection{Bloqueur de publicité}
+On utilisera le logiciel Pi-Hole, basé sur le serveur DNS avec option cache dnsmasq.
+Celui ci sera déployé sur un serveur Debian.\\\\
+Celui bloque les publicités en prétentant être les serveur web des annonceurs.\\\\
+Pour configurer Pi-Hole, on déploiera un serveur HTTP nginx ou lighttpd. On aura ainsi une interface WEB de gestion de Pi-Hole. Celle ci servira, entre autres, à ajouter des domaines à une whitelist de domaine bloqués.\\
+Cela servira à rétablir le service pour les sites web refusant d'afficher leurs contenu si la publicité est bloquée.\\
+Associé au service de ticket qui sera mis en place sur le réseau IN'TECH, le service aux étudiants sera garanti. \\\\
+En résumé :
+\begin{itemize}
+    \item{OS du serveur : Debian}
+    \item{Bloqueur : Pi-Hole}
+    \item{Interface : nginx ou lighttpd}
+\end{itemize}
+\break
+\subsection{Pré-téléchargement des logiciels}
+Pour répondre à la problématique de temps de téléchargement des logiciels pour les TPs/TDs, on déploiera un serveur de téléchargement et de déploiement de serveur FTP/HTTP.\\\\
+Une IHM de gestion sera mise en place.\\
+Elle servira à préciser une URL de téléchargement et obtenir l'adresse du serveur de fichier. \\\\
+L'utilisateur (ici le professeur) pourra alors se déconnecter du serveur, le téléchargement continuant en tâche de fond.\\
+Une fois le téléchargement terminé, un serveur de fichier proposera le fichier au téléchargement sur le réseau local pour les étudiants. \\
+Les fichiers téléchargés seront effacés régulierement pour optimiser le stockage. \\\\
+En résumé :
+\begin{itemize}
+    \item{OS des serveurs  : Debian}
+    \item{Serveur web : nginx}
+    \item{IHM  : PHP, HTML5}
+    \item{Déploiement : ansible}
+\end{itemize}
+\break
+\section{Spécifications matérielles}
+Le projet sera hébergé sur l'infrastructure virtuelle mutualisée d'IN'TECH, Himalaya.\\
+On aura donc besoin d'une machine virtuelle par partie du projet (architecture microservice). \\
+S'il s'avère que les dimensionnements ci après sont trop faibles, on pourra les augmenter de façon transparente pour les systèmes.\\\\
+Les machines auront besoin des spécifications suivantes :
+\subsection{Cache de paquets}
+\subsubsection{Linux}
+\begin{itemize}
+    \item{RAM : 2 Go}
+    \item{Processeur : 1 coeur}
+    \item{Stockage : 250Go toutes distributions combinées}
+\end{itemize}
+\subsubsection{\windaube}
+Les besoins matériels de Windows Serveur sont plus élevés que ceux de linux, la machine aura donc des spécifications plus importantes que celles des différents serveur linux.
+\begin{itemize}
+    \item{RAM : 8 Go}
+    \item{Processeur : 2 coeurs}
+    \item{Stockage : 200 Go}
+\end{itemize}
+\break
+\subsection{Bloqueur de publicité}
+\begin{itemize}
+    \item{RAM : 1 Go}
+    \item{Processeur : 1 coeur}
+    \item{Stockage : 5 Go}
+\end{itemize}
+\subsection{Pré-téléchargement des logiciels}
+\begin{itemize}
+    \item{RAM : 2 Go}
+    \item{Processeur : 1 coeur}
+    \item{Stockage : 50 Go}
+\end{itemize}
+\end{document}

@@ -1,0 +1,77 @@
+\documentclass[14pt,a4paper]{extarticle}
+\author{Valentin MICHEL}
+\date{15 Octobre 2019}
+\usepackage{graphicx}
+\newcommand{\windaube}{Microsoft Windows®}
+\usepackage{hyperref}
+\usepackage[document]{ragged2e}
+\usepackage[a4paper, tmargin=3cm]{geometry}
+\title{Cahier des Charges \\ Projet NetScratch \\ Mission QoS}
+
+\begin{document}
+\maketitle{}
+\center{\includegraphics[]{../../supertest.jpg}}
+\justify
+\break
+\tableofcontents
+\break
+\section{Contexte et Objectifs}
+\subsection{Contexte du Projet}
+Le réseau d'IN'TECH est encore en chantier après la mise en service de l'infrastructure suite aux projets joints du semestre dernier. \\\\
+Après une demande du service informatique du Groupe ESIEA, les anciens réseaux de TP d'IN'TECH, les réseaux "Semestre", ont été coupés. IN'TECH est aujourd'hui sans réseau de TP viable.\\\\
+La gouvernance informatique du parc IN'TECH cherche a déployer des réseaux TP utilisables pour les étudiants et leurs permettre de travailler.\\\\
+C'est dans ce contexte que l'équipe NetScratch travaille à déployer des outils améliorant la QoS (qualité de service).
+\subsection{Objectifs}
+\begin{itemize}
+    \item{Optimiser l'utilisation de la bande passante à des fins de mises à jour de systèmes d'exploitation}
+    \item{Bloquer la publicité sur le réseau IN'TECH}
+    \item{Forcer les clients linux à utiliser les serveur de caches}
+    \item{Automatiser le déploiement de serveur de fichier pour les logiciels de TP, TD...}
+\end{itemize}
+\break
+\section{Contraintes}
+\begin{itemize}
+    \item{Ce projet devra être opérationnel pour la fin du semestre 4 IN'TECH.}
+    \item{Ce projet ne doit pas interférer avec l'expérience des utilisateurs IN'TECH. En cas d'avarie des services déployés, les utilisateurs ne doivent pas être impactés.}
+\end{itemize}
+\section{Livrables}
+\subsection{Livrable techniques}
+\begin{itemize}
+    \item{Serveur DNS Pi-Hole configuré}
+    \item{Serveur de cache pour Ubuntu}
+    \item{Serveur de cache pour Debian}
+    \item{Serveur de cache pour CentOS / RHEL}
+    \item{Serveur de MAJ \windaube WSUS}
+    \item{Scripts de déployement automatique de serveur de fichier}
+    \item{IHM pour les scripts de déployement}
+\end{itemize}
+\subsection{Livrable documentaires}
+\begin{itemize}
+    \item{Fiche PI}
+    \item{Charte de Projet}
+    \item{Cahier des Charges}
+    \item{Documents d'exploitation}
+    \item{Spécifications}
+    \item{Cahier de Recette}
+\end{itemize}
+\break
+\section{Moyens Disponibles}
+\subsection{Matériel}
+\begin{itemize}
+    \item{Ordinateurs personnels des membres du projet}
+    \item{Himalaya, l'infrastructure mutualisée d'IN'TECH}
+\end{itemize}
+\subsection{Logiciel}
+\begin{itemize}
+    \item{Python}
+    \item{Ansible}
+    \item{nginx}
+    \item{apt-cacher}
+    \item{VMware Workstation, VSphère}
+    \item{ftp}
+    \item{debian}
+    \item{Pi-Hole}
+    \item{squid}
+\end{itemize}
+
+\end{document}

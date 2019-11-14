@@ -1,0 +1,167 @@
+\documentclass[9pt]{beamer}
+\usetheme[width=1.5cm]{PaloAlto}
+\usepackage{xcolor}
+\definecolor{intechgreen}{rgb}{0.45, 0.71, 0.34}
+%\definecolor{applegreen}{rgb}{0.11, 0.18, 0.08}
+\usepackage{graphicx}
+\usecolortheme[named=intechgreen]{structure}
+
+\begin{document}
+\title[NetScratch]{NetScratch - Phase Avant-Projet \\ Itération 1}
+\institute{IN'TECH}
+\date{7 novembre 2019}
+\logo{\includegraphics[height=10mm]{../../supertest.jpg}}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\frame{\tableofcontents}
+
+\section{Équipe}
+\begin{frame}
+    \frametitle{Équipe}
+    \begin{center}
+        \begin{itemize}
+            \item{\textbf{Valentin Michel} - \textit{Chef de Projet}}
+            \item{Ismaël Nimzil}
+            \item{Alphène Ekofo Bosako}
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\section{Deux missions}
+\begin{frame}
+    \frametitle{Deux missions}
+    \begin{columns}[T]
+        \begin{column}{0.5\textwidth}
+            \begin{block}{Mission QoS}
+                \begin{center} 
+                Offrir des services pour améliorer la qualité de service sur le réseau IN'TECH
+                \end{center}
+            \end{block}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{block}{Mission Asso}
+                \begin{center} 
+                    Refonte complète du réseau des assos  \\
+                    \begin{itemize}
+                        \item{Air ESIEA}
+                        \item{DTRE}
+                    \end{itemize}
+                    \begin{flushleft}
+                        Peut être :
+                    \end{flushleft}
+                    \begin{itemize}
+                        \item{Kernel Panic Systems}
+                    \end{itemize}
+                \end{center}
+            \end{block}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\section{Objectifs}
+\begin{frame}
+    \frametitle{Objectifs}
+    \begin{columns}[T]
+        \begin{column}{0.5\textwidth}
+            \begin{block}{Mission QoS}
+                \begin{itemize}
+                    \item{Optimiser l'utilisation de la bande passante à des fins de mises à jour de systèmes d'exploitation}
+                    \item{Bloquer la publicité sur le réseau IN'TECH}
+                    \item{Automatiser le déploiement de serveur de fichier pour les logiciels de TP, TD...}
+                \end{itemize}
+            \end{block}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{block}{Mission Asso}
+                Infrastructure répondant à :
+                \begin{itemize}
+                    \item{Architecture professionelle}
+                    \item{Segmentation}
+                    \item{Résilience}
+                    \item{Facilité d'administration}
+                \end{itemize}
+            \end{block}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\section{Organisation}
+\begin{frame}
+    \frametitle{Organisation}
+    \begin{center}
+        Organisation temporelle : \\
+        \vspace{2mm}
+        4 itérations \\
+        540 heures-hommes \\ 
+        Trello \\
+        \vspace{5mm}
+        Organisation documentaire : \\
+        \vspace{2mm}
+        Documentation : Google Drive \\
+        Code et config : GitHub \\
+    \end{center}
+    
+\end{frame}
+
+\section{Technologies}
+\begin{frame}
+    \frametitle{Technologies}
+    \begin{columns}[T]
+        \begin{column}{0.5\textwidth}
+            \begin{block}{Mission QoS}
+            Serveur de cache
+            \begin{itemize}
+                \item{apt-cacher-ng}
+                \item{nginx}
+                \item{squid}
+            \end{itemize}
+            Bloqueur de Pub
+            \begin{itemize}
+                \item{Pi-Hole}
+                \item{nginx}
+                \item{lighttpd}
+            \end{itemize}
+            Pretéléchargement de logiciel
+            \begin{itemize}
+                \item{Python}
+                \item{ansible}
+                \item{HTML5}
+            \end{itemize}
+            \end{block}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{block}{Mission Asso}
+            Firewall
+            \begin{itemize}
+                \item{OPNsense}
+            \end{itemize}
+            OS
+            \begin{itemize}
+                \item{CentOS (et pas archlinux :p )}
+            \end{itemize}
+            VPN
+            \begin{itemize}
+                \item{WireGuard}
+            \end{itemize}
+            Authentification
+            \begin{itemize}
+                \item{RADIUS}
+                \item{LDAP}
+            \end{itemize}
+            \end{block}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%\begin{frame}
+%\end{frame}
+%
+%\begin{frame}
+%\end{frame}
+%
+%\begin{frame}
+%\end{frame}
+\end{document}
