@@ -1,0 +1,10 @@
+[Unit]
+Description=Restore ISCSI config
+Wants=networking.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/targetctl restore /etc/rtslib-fb-target/config.json
+
+[Install]
+WantedBy=multi-user.target
